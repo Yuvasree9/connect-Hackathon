@@ -10,6 +10,7 @@
   border: 1px solid #bbbbbb;
   background-color: white;
   border-radius: 10px;
+
   .grid-child {
     border: 1px solid #bbbbbb;
     width: 250px;
@@ -17,7 +18,6 @@
     margin: 10px;
     padding: 10px;
     display: flex;
-
     align-items: center;
     flex-direction: column;
     border-radius: 10px;
@@ -49,7 +49,6 @@
       width: 90%;
       height: 40px;
       position: absolute;
-
       bottom: 10px;
       cursor: pointer;
       background-color: white;
@@ -68,6 +67,107 @@
     button:hover {
       border: 2px solid #004284;
       background-color: #bbdefb;
+    }
+  }
+}
+
+/* Media queries for responsiveness */
+
+/* 200px to 300px */
+@media (max-width: 300px) {
+  .connections-main {
+    grid-template-columns: auto;
+    margin: 10px;
+    padding: 5px;
+  }
+
+  .grid-child {
+    width: 200px;
+    height: 280px;
+
+    img {
+      width: 120px;
+      height: 120px;
+    }
+
+    .name {
+      font-size: 14px;
+    }
+
+    .headline {
+      font-size: 13px;
+    }
+
+    button {
+      width: 80%;
+      height: 35px;
+      font-size: 14px;
+    }
+  }
+}
+
+/* 300px to 400px */
+@media (min-width: 301px) and (max-width: 400px) {
+  .connections-main {
+    grid-template-columns: auto;
+    margin: 20px;
+    padding: 10px;
+  }
+
+  .grid-child {
+    width: 220px;
+    height: 300px;
+
+    img {
+      width: 130px;
+      height: 130px;
+    }
+
+    .name {
+      font-size: 15px;
+    }
+
+    .headline {
+      font-size: 14px;
+    }
+
+    button {
+      width: 85%;
+      height: 38px;
+      font-size: 15px;
+    }
+  }
+}
+
+/* 400px to 600px */
+@media (min-width: 401px) and (max-width: 600px) {
+  .connections-main {
+    grid-template-columns: auto auto;
+    margin: 25px;
+    padding: 15px;
+  }
+
+  .grid-child {
+    width: 240px;
+    height: 320px;
+
+    img {
+      width: 140px;
+      height: 140px;
+    }
+
+    .name {
+      font-size: 16px;
+    }
+
+    .headline {
+      font-size: 15px;
+    }
+
+    button {
+      width: 90%;
+      height: 40px;
+      font-size: 16px;
     }
   }
 }

@@ -37,3 +37,65 @@
   flex-direction: column;
   align-items: center;
 }
+
+/* Media queries for responsiveness */
+
+/* 200px to 300px */
+@media (max-width: 300px) {
+  .modal-input {
+    font-size: 14px;
+  }
+
+  .ql-container.ql-snow {
+    font-size: 18px;
+  }
+
+  .picture-icon {
+    bottom: 10px;
+    font-size: 18px;
+  }
+
+  .preview-image {
+    margin-top: 10px;
+  }
+}
+
+/* 300px to 400px */
+@media (min-width: 301px) and (max-width: 400px) {
+  .modal-input {
+    font-size: 15px;
+  }
+
+  .ql-container.ql-snow {
+    font-size: 19px;
+  }
+
+  .picture-icon {
+    bottom: 15px;
+    font-size: 20px;
+  }
+
+  .preview-image {
+    margin-top: 15px;
+  }
+}
+
+/* 400px to 600px */
+@media (min-width: 401px) and (max-width: 600px) {
+  .modal-input {
+    font-size: 16px;
+  }
+
+  .ql-container.ql-snow {
+    font-size: 20px;
+  }
+
+  .picture-icon {
+    bottom: 20px;
+    font-size: 22px;
+  }
+
+  .preview-image {
+    margin-top: 20px;
+  }
+}

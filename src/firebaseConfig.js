@@ -7,11 +7,21 @@ import { getStorage } from "firebase/storage";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-const firebaseConfig = {};
+const firebaseConfig = {
+  apiKey: "AIzaSyDoACpzTptr1-Yjd4t58_8hN03bc9xzl0g",
+  authDomain: "connect-mvp-ace2e.firebaseapp.com",
+  projectId: "connect-mvp-ace2e",
+  storageBucket: "connect-mvp-ace2e.appspot.com",
+  messagingSenderId: "154485172376",
+  appId: "1:154485172376:web:777b069742b728872848ed",
+  measurementId: "G-XV95RS0PWF",
+};
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const firestore = getFirestore(app);
 const storage = getStorage(app);
-export { auth, app, firestore, storage };
+// const geofirestore = new GeoFirestore(firestore);
+
+export { auth, app, firestore, storage};

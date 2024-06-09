@@ -4,6 +4,7 @@
   align-items: center;
   flex-direction: column;
   position: relative;
+
   .user-details {
     width: 550px;
     height: auto;
@@ -14,6 +15,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
     img {
       width: 100px;
       height: 100px;
@@ -34,6 +36,7 @@
       margin-top: -15px;
     }
   }
+
   .post-status {
     width: 550px;
     height: 120px;
@@ -51,6 +54,7 @@
       object-fit: cover;
       border-radius: 50%;
     }
+
     .open-post-modal {
       width: 80%;
       height: 50px;
@@ -70,6 +74,131 @@
 
     .open-post-modal:hover {
       background-color: #dcdbdb;
+    }
+  }
+}
+
+/* Media queries for responsiveness */
+
+/* 200px to 300px */
+@media (max-width: 300px) {
+  .user-details,
+  .post-status {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .user-details {
+    img {
+      width: 60px;
+      height: 60px;
+    }
+
+    .name {
+      font-size: 14px;
+    }
+
+    .headline {
+      font-size: 12px;
+    }
+  }
+
+  .post-status {
+    height: 100px;
+
+    .post-image {
+      width: 40px;
+      height: 40px;
+    }
+
+    .open-post-modal {
+      width: 75%;
+      height: 40px;
+      font-size: 12px;
+      padding: 10px;
+      margin-left: -20px;
+    }
+  }
+}
+
+/* 300px to 400px */
+@media (min-width: 301px) and (max-width: 400px) {
+  .user-details,
+  .post-status {
+    width: 90%;
+    margin-top: 40px;
+  }
+
+  .user-details {
+    img {
+      width: 80px;
+      height: 80px;
+    }
+
+    .name {
+      font-size: 16px;
+    }
+
+    .headline {
+      font-size: 14px;
+    }
+  }
+
+  .post-status {
+    height: 110px;
+
+    .post-image {
+      width: 50px;
+      height: 50px;
+    }
+
+    .open-post-modal {
+      width: 78%;
+      height: 45px;
+      font-size: 13px;
+      padding: 12px;
+      margin-left: -25px;
+    }
+  }
+}
+
+/* 400px to 600px */
+@media (min-width: 401px) and (max-width: 600px) {
+  .user-details,
+  .post-status {
+    width: 80%;
+    margin-top: 60px;
+  }
+
+  .user-details {
+    img {
+      width: 90px;
+      height: 90px;
+    }
+
+    .name {
+      font-size: 17px;
+    }
+
+    .headline {
+      font-size: 15px;
+    }
+  }
+
+  .post-status {
+    height: 115px;
+
+    .post-image {
+      width: 55px;
+      height: 55px;
+    }
+
+    .open-post-modal {
+      width: 80%;
+      height: 48px;
+      font-size: 13.5px;
+      padding: 14px;
+      margin-left: -28px;
     }
   }
 }

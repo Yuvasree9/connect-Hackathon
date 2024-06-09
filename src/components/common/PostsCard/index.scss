@@ -8,12 +8,14 @@
   display: flex;
   flex-direction: column;
   padding-bottom: 20px;
+
   .post-image-wrapper {
     display: flex;
     padding: 15px;
     gap: 10px;
     position: relative;
   }
+
   .profile-image {
     width: 70px;
     height: 70px;
@@ -26,22 +28,24 @@
     font-size: 18px;
     color: #212121;
     font-weight: 600;
-    margin: 0px 0 0 0px;
+    margin: 0;
     cursor: pointer;
   }
+
   .headline {
     font-family: system-ui, sans-serif;
     font-size: 15px;
     color: rgba(0, 0, 0, 0.6);
     font-weight: 500;
-    margin: 0px 0 0 0px;
+    margin: 0;
   }
+
   .timestamp {
     font-family: system-ui, sans-serif;
     font-size: 12px;
     color: rgba(0, 0, 0, 0.6);
     font-weight: 400;
-    margin: 0px 0 0 0px;
+    margin: 0;
   }
 
   .status {
@@ -60,6 +64,7 @@
   cursor: pointer;
   display: flex;
   top: 10px;
+
   .action-icon {
     color: #474747;
     padding: 10px;
@@ -80,4 +85,156 @@
 
 .modal {
   margin-top: 30px;
+}
+
+/* Media queries for responsiveness */
+
+/* 200px to 300px */
+@media (max-width: 300px) {
+  .posts-card {
+    width: 100%;
+    padding-bottom: 10px;
+
+    .profile-image {
+      width: 50px;
+      height: 50px;
+    }
+
+    .name {
+      font-size: 14px;
+    }
+
+    .headline {
+      font-size: 12px;
+    }
+
+    .timestamp {
+      font-size: 10px;
+    }
+
+    .status {
+      font-size: 14px;
+    }
+  }
+
+  .action-container {
+    right: 10px;
+    top: 5px;
+
+    .action-icon {
+      padding: 5px;
+    }
+
+    .action-icon:hover {
+      padding: 5px;
+    }
+  }
+
+  .post-image {
+    margin-top: 10px;
+  }
+
+  .modal {
+    margin-top: 20px;
+  }
+}
+
+/* 300px to 400px */
+@media (min-width: 301px) and (max-width: 400px) {
+  .posts-card {
+    width: 90%;
+    padding-bottom: 15px;
+
+    .profile-image {
+      width: 60px;
+      height: 60px;
+    }
+
+    .name {
+      font-size: 16px;
+    }
+
+    .headline {
+      font-size: 14px;
+    }
+
+    .timestamp {
+      font-size: 11px;
+    }
+
+    .status {
+      font-size: 16px;
+    }
+  }
+
+  .action-container {
+    right: 15px;
+    top: 8px;
+
+    .action-icon {
+      padding: 8px;
+    }
+
+    .action-icon:hover {
+      padding: 8px;
+    }
+  }
+
+  .post-image {
+    margin-top: 15px;
+  }
+
+  .modal {
+    margin-top: 25px;
+  }
+}
+
+/* 400px to 600px */
+@media (min-width: 401px) and (max-width: 600px) {
+  .posts-card {
+    width: 80%;
+    padding-bottom: 20px;
+
+    .profile-image {
+      width: 65px;
+      height: 65px;
+    }
+
+    .name {
+      font-size: 17px;
+    }
+
+    .headline {
+      font-size: 14.5px;
+    }
+
+    .timestamp {
+      font-size: 11.5px;
+    }
+
+    .status {
+      font-size: 17px;
+    }
+  }
+
+  .action-container {
+    right: 18px;
+    top: 9px;
+
+    .action-icon {
+      padding: 9px;
+    }
+
+    .action-icon:hover {
+      padding: 9px;
+    }
+  }
+
+  .post-image {
+    margin-top: 18px;
+  }
+
+  .modal {
+    margin-top: 28px;
+  }
 }

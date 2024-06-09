@@ -9,8 +9,8 @@ import {
   where,
   setDoc,
   deleteDoc,
+  getDoc,
   orderBy,
-  serverTimestamp,
 } from "firebase/firestore";
 import { toast } from "react-toastify";
 
@@ -19,6 +19,10 @@ let userRef = collection(firestore, "users");
 let likeRef = collection(firestore, "likes");
 let commentsRef = collection(firestore, "comments");
 let connectionRef = collection(firestore, "connections");
+let collaborationsRef = collection(firestore, "collaborations");
+let projectsRef = collection(firestore, "projects");
+
+
 
 export const postStatus = (object) => {
   addDoc(postsRef, object)
@@ -220,5 +224,116 @@ export const getConnections = (userId, targetId, setIsConnected) => {
     });
   } catch (err) {
     console.log(err);
+  }
+};
+
+
+// Add a reference to the new collaborations collection
+
+export const sendCollaborationRequest = (requesterId, receiverId, postId, message) => {
+  addDoc(collaborationsRef, {
+    requesterId,
+    receiverId,
+    postId,
+    message, // Include the message field
+    status: "pending",
+  })
+    .then(() => {
+      toast.success("Collaboration request sent successfully");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+
+// Function to get collaboration requests
+export const getCollaborationRequests = (receiverId, setRequests) => {
+  const q = query(collaborationsRef, where("receiverId", "==", receiverId), where("status", "==", "pending"));
+  onSnapshot(q, (response) => {
+    setRequests(
+      response.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+    );
+  });
+};
+
+
+// Function to add a new project
+export const addProject = async (projectData) => {
+  try {
+    const docRef = await addDoc(projectsRef, projectData);
+    return docRef.id; // Return the ID of the newly created project
+  } catch (error) {
+    console.error("Error adding project: ", error);
+    throw error;
+  }
+};
+
+// Function to fetch all projects
+export const getProjects = async () => {
+  try {
+    const querySnapshot = await getDocs(projectsRef);
+    const projects = [];
+    querySnapshot.forEach((doc) => {
+      projects.push({ id: doc.id, ...doc.data() });
+    });
+    return projects;
+  } catch (error) {
+    console.error("Error fetching projects: ", error);
+    throw error;
+  }
+};
+
+// Function to update a project
+export const updateProject = async (projectId, newData) => {
+  try {
+    const projectDocRef = doc(projectsRef, projectId);
+    await updateDoc(projectDocRef, newData);
+    console.log("Project updated successfully");
+  } catch (error) {
+    console.error("Error updating project: ", error);
+    throw error;
+  }
+};
+
+export const createGroup = async (members) => {
+  try {
+    const docRef = await addDoc(collection(firestore, "groups"), { members });
+    return docRef.id; // Return the ID of the newly created group
+  } catch (error) {
+    console.error("Error creating group: ", error);
+    throw error;
+  }
+};
+
+// Function to update collaboration request status and store collaborating users
+export const updateCollaborationStatus = async (requestId, status, postId, collaboratingUsers) => {
+  const docToUpdate = doc(collaborationsRef, requestId);
+  await updateDoc(docToUpdate, { status });
+
+  // If the collaboration request is accepted, store collaborating users in a separate collection
+  if (status === "accepted") {
+    collaboratingUsers.forEach(async (userId) => {
+      try {
+        await addDoc(collection(firestore, "collaboratingUsers"), { userId, postId });
+      } catch (error) {
+        console.error("Error adding collaborating user: ", error);
+        throw error;
+      }
+    });
+  }
+};
+
+// Function to fetch collaborating users for a project
+export const getCollaboratingUsers = async (postId) => {
+  try {
+    const collaboratingUsersRef = collection(firestore, "collaboratingUsers");
+    const q = query(collaboratingUsersRef, where("postId", "==", postId));
+    const querySnapshot = await getDocs(q);
+    const collaboratingUsers = querySnapshot.docs.map((doc) => doc.data().userId);
+    return collaboratingUsers;
+  } catch (error) {
+    console.error("Error fetching collaborating users: ", error);
+    throw error;
   }
 };

@@ -7,29 +7,58 @@ import {
   getAllUsers,
   deletePost,
   getConnections,
+  getCollaborationRequests,
+  updateCollaborationStatus,
 } from "../../../api/FirestoreAPI";
 import LikeButton from "../LikeButton";
+import Ally from "./Ally";
 import "./index.scss";
+
+// Function to remove HTML tags from a string
+const stripHtmlTags = (html) => {
+  const div = document.createElement("div");
+  div.innerHTML = html;
+  return div.textContent || div.innerText || "";
+};
 
 export default function PostsCard({ posts, id, getEditData }) {
   let navigate = useNavigate();
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState(null);
   const [allUsers, setAllUsers] = useState([]);
   const [imageModal, setImageModal] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
+  const [requests, setRequests] = useState([]);
+
   useMemo(() => {
     getCurrentUser(setCurrentUser);
     getAllUsers(setAllUsers);
   }, []);
 
   useEffect(() => {
-    getConnections(currentUser.id, posts.userID, setIsConnected);
-  }, [currentUser.id, posts.userID]);
+    if (currentUser?.id && posts?.userID) {
+      getConnections(currentUser.id, posts.userID, setIsConnected);
+    }
+    if (currentUser?.id) {
+      getCollaborationRequests(currentUser.id, setRequests);
+    }
+  }, [currentUser?.id, posts?.userID]);
+
+  const handleUpdateRequestStatus = (requestId, status) => {
+    updateCollaborationStatus(requestId, status);
+  };
+
+  // Ensure currentUser and posts are defined before rendering
+  if (!currentUser || !posts) {
+    return null;
+  }
+
+  const user = allUsers.find((user) => user.id === posts.userID);
+  const strippedStatus = stripHtmlTags(posts?.status);
 
   return isConnected || currentUser.id === posts.userID ? (
     <div className="posts-card" key={id}>
       <div className="post-image-wrapper">
-        {currentUser.id === posts.userID ? (
+        {currentUser.id === posts.userID && (
           <div className="action-container">
             <BsPencil
               size={20}
@@ -42,18 +71,12 @@ export default function PostsCard({ posts, id, getEditData }) {
               onClick={() => deletePost(posts.id)}
             />
           </div>
-        ) : (
-          <></>
         )}
 
         <img
           alt="profile-image"
           className="profile-image"
-          src={
-            allUsers
-              .filter((item) => item.id === posts.userID)
-              .map((item) => item.imageLink)[0]
-          }
+          src={user?.imageLink}
         />
         <div>
           <p
@@ -64,32 +87,28 @@ export default function PostsCard({ posts, id, getEditData }) {
               })
             }
           >
-            {allUsers.filter((user) => user.id === posts.userID)[0]?.name}
+            {user?.name}
           </p>
-          <p className="headline">
-            {allUsers.filter((user) => user.id === posts.userID)[0]?.headline}
-          </p>
-          <p className="timestamp">{posts.timeStamp}</p>
+          <p className="headline">{user?.headline}</p>
+          <p className="timestamp">{posts?.timeStamp}</p>
         </div>
       </div>
-      {posts.postImage ? (
+      {posts?.postImage && (
         <img
           onClick={() => setImageModal(true)}
           src={posts.postImage}
           className="post-image"
           alt="post-image"
         />
-      ) : (
-        <></>
       )}
       <p
         className="status"
-        dangerouslySetInnerHTML={{ __html: posts.status }}
+        dangerouslySetInnerHTML={{ __html: posts?.status }}
       ></p>
 
       <LikeButton
         userId={currentUser?.id}
-        postId={posts.id}
+        postId={posts?.id}
         currentUser={currentUser}
       />
 
@@ -101,14 +120,20 @@ export default function PostsCard({ posts, id, getEditData }) {
         footer={[]}
       >
         <img
-          onClick={() => setImageModal(true)}
-          src={posts.postImage}
+          src={posts?.postImage}
           className="post-image modal"
           alt="post-image"
         />
       </Modal>
+
+      <Ally
+        currentUser={currentUser}
+        posts={posts}
+        allUsers={allUsers}
+        requests={requests}
+        handleUpdateRequestStatus={handleUpdateRequestStatus}
+        stripHtmlTags={stripHtmlTags}
+      />
     </div>
-  ) : (
-    <></>
-  );
+  ) : null;
 }

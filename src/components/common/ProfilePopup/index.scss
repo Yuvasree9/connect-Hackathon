@@ -6,9 +6,9 @@
   border-radius: 5px;
   display: flex;
   justify-content: center;
-
   flex-direction: column;
   padding: 20px;
+
   .name {
     font-size: 16px;
     color: rgba(0, 0, 0, 0.9);
@@ -23,7 +23,64 @@
     color: rgba(0, 0, 0, 0.9);
     margin-top: -15px;
   }
+
   .popup-option {
     cursor: pointer;
+  }
+}
+
+/* Media queries for responsiveness */
+
+/* 200px to 300px */
+@media (max-width: 300px) {
+  .popup-card {
+    width: 150px;
+    padding: 10px;
+
+    .name {
+      font-size: 12px;
+      margin-top: -5px;
+    }
+
+    .headline {
+      font-size: 10px;
+      margin-top: -10px;
+    }
+  }
+}
+
+/* 300px to 400px */
+@media (min-width: 301px) and (max-width: 400px) {
+  .popup-card {
+    width: 180px;
+    padding: 15px;
+
+    .name {
+      font-size: 14px;
+      margin-top: -6px;
+    }
+
+    .headline {
+      font-size: 12px;
+      margin-top: -12px;
+    }
+  }
+}
+
+/* 400px to 600px */
+@media (min-width: 401px) and (max-width: 600px) {
+  .popup-card {
+    width: 200px;
+    padding: 18px;
+
+    .name {
+      font-size: 15px;
+      margin-top: -7px;
+    }
+
+    .headline {
+      font-size: 13px;
+      margin-top: -13px;
+    }
   }
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import LinkedinLogo from "../../../assets/linkedinLogo.png";
+// import LinkedinLogo from "../../../assets/linkedinLogo.png";
 import user from "../../../assets/user.png";
 import SearchUsers from "../SearchUsers";
 import {
@@ -75,7 +75,8 @@ export default function Topbar({ currentUser }) {
         <></>
       )}
 
-      <img className="linkedin-logo" src={LinkedinLogo} alt="LinkedinLogo" />
+      {/* <img className="linkedin-logo" src={LinkedinLogo} alt="LinkedinLogo" /> */}
+      <h2 className="linkedin-logo">Connect</h2>
       {isSearch ? (
         <SearchUsers
           setIsSearch={setIsSearch}

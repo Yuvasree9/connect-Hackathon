@@ -16,19 +16,29 @@ export default function PostStatus({ currentUser }) {
   const [postImage, setPostImage] = useState("");
 
   const sendStatus = async () => {
+    if (!currentUser) {
+      console.error("Current user is not defined");
+      return;
+    }
+
     let object = {
       status: status,
       timeStamp: getCurrentTimeStamp("LLL"),
-      userEmail: currentUser.email,
-      userName: currentUser.name,
+      userEmail: currentUser?.email || "unknown",
+      userName: currentUser?.name || "unknown",
       postID: getUniqueID(),
-      userID: currentUser.id,
+      userID: currentUser?.id || "unknown",
       postImage: postImage,
     };
-    await postStatus(object);
-    await setModalOpen(false);
-    setIsEdit(false);
-    await setStatus("");
+
+    try {
+      await postStatus(object);
+      setModalOpen(false);
+      setIsEdit(false);
+      setStatus("");
+    } catch (error) {
+      console.error("Error posting status:", error);
+    }
   };
 
   const getEditData = (posts) => {
@@ -38,19 +48,27 @@ export default function PostStatus({ currentUser }) {
     setIsEdit(true);
   };
 
-  const updateStatus = () => {
-    updatePost(currentPost.id, status, postImage);
-    setModalOpen(false);
+  const updateStatus = async () => {
+    try {
+      await updatePost(currentPost.id, status, postImage);
+      setModalOpen(false);
+    } catch (error) {
+      console.error("Error updating post:", error);
+    }
   };
 
   useMemo(() => {
     getStatus(setAllStatus);
   }, []);
 
+  if (!currentUser) {
+    return <div>Loading...</div>; // or any loading indicator
+  }
+
   return (
     <div className="post-status-main">
       <div className="user-details">
-        <img src={currentUser?.imageLink} alt="imageLink" />
+        <img src={currentUser?.imageLink} alt="User profile" />
         <p className="name">{currentUser?.name}</p>
         <p className="headline">{currentUser?.headline}</p>
       </div>
@@ -58,7 +76,7 @@ export default function PostStatus({ currentUser }) {
         <img
           className="post-image"
           src={currentUser?.imageLink}
-          alt="imageLink"
+          alt="User profile"
         />
         <button
           className="open-post-modal"
@@ -87,13 +105,11 @@ export default function PostStatus({ currentUser }) {
       />
 
       <div>
-        {allStatuses.map((posts) => {
-          return (
-            <div key={posts.id}>
-              <PostsCard posts={posts} getEditData={getEditData} />
-            </div>
-          );
-        })}
+        {allStatuses.map((posts) => (
+          <div key={posts.id}>
+            <PostsCard posts={posts} getEditData={getEditData} />
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -6,9 +6,11 @@
   border-radius: 5px;
   padding: 20px;
   position: relative;
+
   .profile-info {
     display: flex;
     justify-content: space-between;
+
     .profile-image {
       width: 200px;
       height: 200px;
@@ -18,9 +20,11 @@
       padding: 5px;
       cursor: pointer;
     }
+
     .right-info {
       margin-top: 25px;
       margin-right: 20px;
+
       .college,
       .company {
         font-family: system-ui;
@@ -40,9 +44,11 @@
     color: #004c75 !important;
     -webkit-link: #004c75;
   }
+
   .skill-label {
     font-weight: 600;
   }
+
   .edit-btn {
     position: absolute;
     right: 20px;
@@ -58,6 +64,7 @@
       border-radius: 50%;
     }
   }
+
   .userName {
     font-family: system-ui;
     color: rgba(0, 0, 0, 0.9);
@@ -74,5 +81,136 @@
     color: rgba(0, 0, 0, 0.9);
     width: 320px;
     line-height: 20px;
+  }
+}
+
+/* Media queries for responsiveness */
+
+/* 200px to 300px */
+@media (max-width: 300px) {
+  .profile-card {
+    margin: 10px;
+    padding: 10px;
+
+    .profile-info {
+      flex-direction: column;
+      align-items: center;
+
+      .profile-image {
+        width: 100px;
+        height: 100px;
+      }
+
+      .right-info {
+        margin-top: 15px;
+        margin-right: 0;
+
+        .college,
+        .company {
+          font-size: 12px;
+          line-height: 20px;
+        }
+      }
+    }
+
+    .userName {
+      font-size: 18px;
+    }
+
+    .heading {
+      width: 100%;
+      font-size: 14px;
+      line-height: 18px;
+    }
+
+    .edit-btn {
+      right: 10px;
+    }
+  }
+}
+
+/* 300px to 400px */
+@media (min-width: 301px) and (max-width: 400px) {
+  .profile-card {
+    margin: 15px;
+    padding: 15px;
+
+    .profile-info {
+      flex-direction: column;
+      align-items: center;
+
+      .profile-image {
+        width: 120px;
+        height: 120px;
+      }
+
+      .right-info {
+        margin-top: 20px;
+        margin-right: 0;
+
+        .college,
+        .company {
+          font-size: 13px;
+          line-height: 25px;
+        }
+      }
+    }
+
+    .userName {
+      font-size: 20px;
+    }
+
+    .heading {
+      width: 90%;
+      font-size: 15px;
+      line-height: 19px;
+    }
+
+    .edit-btn {
+      right: 15px;
+    }
+  }
+}
+
+/* 400px to 600px */
+@media (min-width: 401px) and (max-width: 600px) {
+  .profile-card {
+    margin: 20px;
+    padding: 18px;
+
+    .profile-info {
+      flex-direction: column;
+      align-items: center;
+
+      .profile-image {
+        width: 150px;
+        height: 150px;
+      }
+
+      .right-info {
+        margin-top: 22px;
+        margin-right: 0;
+
+        .college,
+        .company {
+          font-size: 14px;
+          line-height: 28px;
+        }
+      }
+    }
+
+    .userName {
+      font-size: 22px;
+    }
+
+    .heading {
+      width: 85%;
+      font-size: 15.5px;
+      line-height: 19.5px;
+    }
+
+    .edit-btn {
+      right: 18px;
+    }
   }
 }

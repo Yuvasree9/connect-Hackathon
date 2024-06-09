@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { editProfile } from "../../../api/FirestoreAPI";
+import { FaLinkedin, FaInstagram, FaEnvelope } from "react-icons/fa"; // Importing social media icons
 import "./index.scss";
 
 export default function ProfileEdit({ onEdit, currentUser }) {
   const [editInputs, setEditInputs] = useState(currentUser);
+
   const getInput = (event) => {
-    let { name, value } = event.target;
-    let input = { [name]: value };
-    setEditInputs({ ...editInputs, ...input });
+    const { name, value } = event.target;
+    setEditInputs({ ...editInputs, [name]: value });
   };
 
   const updateProfileData = async () => {
@@ -104,6 +105,45 @@ export default function ProfileEdit({ onEdit, currentUser }) {
           name="skills"
           value={editInputs.skills}
         />
+
+        {/* Social media input fields */}
+        <label>LinkedIn</label>
+        <div className="social-input">
+          <FaLinkedin className="social-icon" size={20} />
+          <input
+            onChange={getInput}
+            className="common-input"
+            placeholder="LinkedIn"
+            name="linkedin"
+            value={editInputs.linkedin || ""}
+          />
+        </div>
+
+        <label>Instagram</label>
+        <div className="social-input">
+          <FaInstagram className="social-icon" size={20} />
+          <input
+            onChange={getInput}
+            className="common-input"
+            placeholder="Instagram"
+            name="instagram"
+            value={editInputs.instagram || ""}
+          />
+        </div>
+
+        <label>Email</label>
+        <div className="social-input">
+          <FaEnvelope className="social-icon" size={20} />
+          <input
+            onChange={getInput}
+            className="common-input"
+            placeholder="Email"
+            name="email"
+            value={editInputs.email || ""}
+          />
+        </div>
+        {/* Add more social media input fields as needed */}
+
       </div>
       <div className="save-container">
         <button className="save-btn" onClick={updateProfileData}>

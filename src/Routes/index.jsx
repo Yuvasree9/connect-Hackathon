@@ -4,6 +4,7 @@ import Register from "../Pages/Register";
 import HomeLayout from "../layouts/HomeLayout";
 import ProfileLayout from "../layouts/ProfileLayout";
 import ConnectionLayout from "../layouts/ConnectionLayout";
+import Collab from "../components/common/Colloboration/Collab";
 
 export const router = createBrowserRouter([
   {
@@ -25,5 +26,9 @@ export const router = createBrowserRouter([
   {
     path: "/connections",
     element: <ConnectionLayout />,
+  },
+  {
+    path: "/group",
+    element: <Collab />,
   },
 ]);

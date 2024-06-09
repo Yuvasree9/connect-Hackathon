@@ -113,3 +113,68 @@ body {
     font-size: 18px;
   }
 }
+
+/* Media queries for responsiveness */
+
+/* 200px to 300px */
+@media (max-width: 300px) {
+  .login-btn,
+  .auth-inputs,
+  .google-btn-container .google-btn {
+    width: 100%;
+  }
+
+  .linkedinLogo {
+    width: 60px;
+  }
+
+  .heading {
+    font-size: 20px;
+  }
+
+  .sub-heading {
+    font-size: 16px;
+  }
+}
+
+/* 300px to 400px */
+@media (min-width: 301px) and (max-width: 400px) {
+  .login-btn,
+  .auth-inputs,
+  .google-btn-container .google-btn {
+    width: 100%;
+  }
+
+  .linkedinLogo {
+    width: 70px;
+  }
+
+  .heading {
+    font-size: 22px;
+  }
+
+  .sub-heading {
+    font-size: 18px;
+  }
+}
+
+/* 400px to 600px */
+@media (min-width: 401px) and (max-width: 600px) {
+  .login-btn,
+  .auth-inputs,
+  .google-btn-container .google-btn {
+    width: 90%;
+  }
+
+  .linkedinLogo {
+    width: 75px;
+  }
+
+  .heading {
+    font-size: 24px;
+  }
+
+  .sub-heading {
+    font-size: 20px;
+  }
+}
