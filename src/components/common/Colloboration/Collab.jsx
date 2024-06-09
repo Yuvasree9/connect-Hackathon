@@ -17,7 +17,7 @@ export default function Collab({ postId }) {
         setCollaboratingUsers(users);
       })
       .catch((error) => {
-        console.error("Error fetching collaborating users: ", error);
+        console.error("Error fetching collaborating user: ", error);
       });
   }, [postId]);
 
